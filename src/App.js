@@ -4,7 +4,6 @@ import buttonAddPost from './images/Add_post.svg';
 import avatar from './images/Avatar.jpg';
 
 // import './App.css';
-//коммит-проверка
 
 function App() {
     return (
