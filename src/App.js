@@ -1,7 +1,6 @@
-import headerLogo from './images/Logo.svg';
-import buttonEdit from './images/Edit_Button.svg';
-import buttonAddPost from './images/Add_post.svg';
-import avatar from './images/Avatar.jpg';
+import Header from './Header.js';
+import Main from './Main.js';
+import Footer from './Footer.js';
 
 // import './App.css';
 
@@ -10,58 +9,9 @@ function App() {
         <div className="App">
 
             <div class="page">
-                <header className="header">
-                    <img src={headerLogo} alt="Логотип Место" className="header__logo" />
-                </header>
-
-
-                <main class="content">
-                    <section className="profile">
-                        <button type="button" className="profile__button-avatar" aria-label>
-                            <img src={avatar} alt="Аватар пользователя" className="profile__avatar" />
-                            <div className="profile__overlay">
-                                <img src={buttonEdit} alt="Кнопка карандашик" className="profile__edit-avatar" />
-                            </div>
-                        </button>
-                        <div className="profile__info">
-                            <h1 className="profile__info-name">Жак-Ив Кусто</h1>
-                            <button type="button" className="profile__button-edit" aria-label>
-                                <img src={buttonEdit} alt="Кнопка карандашик" className />
-                            </button>
-                        </div>
-                        <p className="profile__info-about">Исследователь океана</p>
-                        <button type="button" className="profile__button-add" aria-label>
-                            <img src={buttonAddPost} alt="Кнопка плюсик" className />
-                        </button>
-                    </section>
-
-                    <section className="elements">
-                    </section>
-
-
-                    <template class="element-template">
-                        <article class="element">
-                            <img class="element__img" />
-                            <h2 class="element__title"></h2>
-                            <div class="element__like">
-                                <button type="button" class="element__button-like" aria-label></button>
-                                <span class="element__counter-like"></span>
-                            </div>
-                            <button type="button" class="element__delete" aria-label>
-                                <img src="<%=require('./images/Delete.svg')%>" alt="Корзина удалить"
-                                    class="element__delete-img" />
-                            </button>
-                        </article>
-
-                    </template>
-
-                </main>
-
-                <footer className="footer">
-                    <p className="footer__copyright">© 2022 Mesto Russia</p>
-                </footer>
-
-
+                <Header />
+                <Main />
+                <Footer />
                 <div>
                     <section className="popup popup_profile">
                         <div className="popup__container">
