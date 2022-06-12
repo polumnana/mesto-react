@@ -14,6 +14,7 @@ class App extends React.Component {
             isEditProfilePopupOpen: false,
             isAddPlacePopupOpen: false,
             isEditAvatarPopupOpen: false,
+            isImagePopupOpen: true,
         }
         this.closeAllPopups = this.closeAllPopups.bind(this);
         this.openPopupAvatar = this.openPopupAvatar.bind(this);
@@ -28,6 +29,7 @@ class App extends React.Component {
                 isEditProfilePopupOpen: false,
                 isAddPlacePopupOpen: false,
                 isEditAvatarPopupOpen: false,
+                isImagePopupOpen: false,
             }
         );
     }
@@ -91,7 +93,8 @@ class App extends React.Component {
 
                     <PopupWithForm onClose={this.closeAllPopups} title="Вы уверены?" name="popup-delete" />
 
-                    <ImagePopup />
+                    <ImagePopup onClose={this.closeAllPopups} isOpened={this.state.isImagePopupOpen}
+                    title="Test" image="chrome://branding/content/about-logo.png"/>
 
 
                 </div>
