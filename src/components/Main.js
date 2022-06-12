@@ -17,9 +17,6 @@ class Main extends React.Component {
 
     // Метод будет вызван сразу после монтирования: создаём эффекты
     componentDidMount() {
-        document.addEventListener('mousemove', this.handleMouseMove);
-        document.body.classList.add('no-cursor');
-
         api.fetchUserInfo()
             .then((userData) => {
                 const myId = userData._id;
