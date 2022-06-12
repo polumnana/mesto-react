@@ -1,6 +1,6 @@
-import buttonEdit from './images/Edit_Button.svg';
-import buttonAddPost from './images/Add_post.svg';
-import avatar from './images/Avatar.jpg';
+import buttonEdit from '../images/Edit_Button.svg';
+import buttonAddPost from '../images/Add_post.svg';
+import avatar from '../images/Avatar.jpg';
 import React from 'react';
 
 class Main extends React.Component {
