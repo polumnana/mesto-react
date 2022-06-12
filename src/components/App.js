@@ -4,7 +4,6 @@ import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 
 
-// import './App.css';
 
 function App() {
     return (
