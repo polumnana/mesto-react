@@ -4,7 +4,6 @@ import imageClose from "../images/Close_edit_Icon.svg"
 class PopupWithForm extends React.Component {
     constructor(props) {
         super(props);
-        this._onClose = props.onClose;
         this.close = this.close.bind(this);
         // this._inputList = this._form.querySelectorAll('.popup__input');
     }
@@ -19,7 +18,7 @@ class PopupWithForm extends React.Component {
     } // собирает данные всех полей формы
     
     close() {
-        this._onClose();
+        this.props.onClose();
         // this._form.reset();
     }
 

@@ -11,11 +11,15 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isEditProfilePopupOpen: true,
+            isEditProfilePopupOpen: false,
             isAddPlacePopupOpen: false,
             isEditAvatarPopupOpen: false,
         }
         this.closeAllPopups = this.closeAllPopups.bind(this);
+        this.openPopupAvatar = this.openPopupAvatar.bind(this);
+        this.openPopupEditProfile = this.openPopupEditProfile.bind(this);
+        this.openPopupAddPost = this.openPopupAddPost.bind(this);
+
     }
 
     closeAllPopups() {
@@ -28,13 +32,44 @@ class App extends React.Component {
         );
     }
 
+    openPopupAvatar() {
+        this.setState(
+            {
+                isEditProfilePopupOpen: false,
+                isAddPlacePopupOpen: false,
+                isEditAvatarPopupOpen: true,
+            }
+        );
+    }
+
+    openPopupEditProfile() {
+        this.setState(
+            {
+                isEditProfilePopupOpen: true,
+                isAddPlacePopupOpen: false,
+                isEditAvatarPopupOpen: false,
+            }
+        );
+
+    }
+
+    openPopupAddPost() {
+        this.setState(
+            {
+                isEditProfilePopupOpen: false,
+                isAddPlacePopupOpen: true,
+                isEditAvatarPopupOpen: false,
+            }
+        );
+    }
+
     render() {
         return (
             <div className="App">
 
                 <div className="page">
                     <Header />
-                    <Main />
+                    <Main openPopupEditProfile={this.openPopupEditProfile} openPopupAddPost={this.openPopupAddPost} openPopupAvatar={this.openPopupAvatar} />
                     <Footer />
                     <PopupWithForm onClose={this.closeAllPopups} title="Редактировать профиль" name="edit-profile" isOpened={this.state.isEditProfilePopupOpen}>
                         <input id="name-input" type="text" className="popup__input popup__input_form-name"
