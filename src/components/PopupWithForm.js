@@ -6,7 +6,7 @@ class PopupWithForm extends React.Component {
         this._handleFormSubmit = props.handleFormSubmit;
         // this._inputList = this._form.querySelectorAll('.popup__input');
         this.state = {
-            popupIsOpened: false,
+            popupIsOpened: props.isOpened,
         };
     }
 
@@ -35,8 +35,8 @@ class PopupWithForm extends React.Component {
         return (
             <section className={classesList}>
                 <div className="popup__container">
-                    <h2 className="popup__title">Редактировать профиль</h2>
-                    <form className="popup__form popup__form_edit-profile" name="formEditProfile" noValidate>
+                    <h2 className="popup__title">{this.props.title}</h2>
+                    <form className={`popup__form popup__form_${this.props.name}`} name="formEditProfile" noValidate>
                         <input id="name-input" type="text" className="popup__input popup__input_form-name"
                             placeholder="Ваше имя" name="username" required minLength="2" maxLength="40" value="" />
                         <span className="popup__type-input-error name-input-error" />
@@ -44,9 +44,9 @@ class PopupWithForm extends React.Component {
                             placeholder="Расскажите о себе..." name="about" required minLength="2" maxLength="200" value="" />
                         <span className="popup__type-input-error about-input-error"></span>
                         <button type="submit"
-                            className="popup__form-submit popup__form-submit_edit-profile popup__form-submit_disabled">Сохранить</button>
+                            className={`popup__form-submit popup__form-submit_${this.props.name} popup__form-submit_disabled`}>Сохранить</button>
                     </form>
-                    <button type="reset" className="popup__close-form popup__close-form_edit-profile" aria-label>
+                    <button type="reset" className={`popup__close-form popup__close-form_${this.props.name}`} aria-label>
                         <img src="" alt="Кнопка закрыть крестик"
                             className="popup__close-form-img" />
                     </button>
