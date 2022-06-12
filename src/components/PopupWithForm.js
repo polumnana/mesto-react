@@ -2,28 +2,7 @@ import React from "react";
 import imageClose from "../images/Close_edit_Icon.svg"
 
 class PopupWithForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.close = this.close.bind(this);
-        // this._inputList = this._form.querySelectorAll('.popup__input');
-    }
-
-    _getInputValues() {
-        this._formValue = {};
-        this._inputList.forEach((item) => {
-            this._formValue[item.name] = item.value;
-        });
-
-        return this._formValue;
-    } // собирает данные всех полей формы
-    
-    close() {
-        this.props.onClose();
-        // this._form.reset();
-    }
-
     render() {
-
         const classesList = this.props.isOpened ? "popup popup_opened" : "popup";
         return (
             <section className={classesList}>
@@ -34,7 +13,7 @@ class PopupWithForm extends React.Component {
                         <button type="submit"
                             className={`popup__form-submit popup__form-submit_${this.props.name} popup__form-submit_disabled`}>Сохранить</button>
                     </form>
-                    <button onClick={this.close} type="reset" className={`popup__close-form popup__close-form_${this.props.name}`} aria-label>
+                    <button onClick={this.props.onClose} type="reset" className={`popup__close-form popup__close-form_${this.props.name}`} aria-label>
                         <img src={imageClose} alt="Кнопка закрыть крестик"
                             className="popup__close-form-img" />
                     </button>
