@@ -4,11 +4,9 @@ import imageClose from "../images/Close_edit_Icon.svg"
 class PopupWithForm extends React.Component {
     constructor(props) {
         super(props);
-        this._handleFormSubmit = props.handleFormSubmit;
+        this._onClose = props.onClose;
+        this.close = this.close.bind(this);
         // this._inputList = this._form.querySelectorAll('.popup__input');
-        this.state = {
-            popupIsOpened: props.isOpened,
-        };
     }
 
     _getInputValues() {
@@ -19,20 +17,15 @@ class PopupWithForm extends React.Component {
 
         return this._formValue;
     } // собирает данные всех полей формы
-
-    open() {
-        this.setState({ popupIsOpened: true });
-        document.addEventListener('keydown', this._handleEscCloseWithBind);
-    }
     
     close() {
-        document.removeEventListener('keydown', this._handleEscCloseWithBind);
-        this._form.reset();
+        this._onClose();
+        // this._form.reset();
     }
 
     render() {
 
-        const classesList = this.state.popupIsOpened ? "popup popup_opened" : "popup";
+        const classesList = this.props.isOpened ? "popup popup_opened" : "popup";
         return (
             <section className={classesList}>
                 <div className="popup__container">
@@ -42,7 +35,7 @@ class PopupWithForm extends React.Component {
                         <button type="submit"
                             className={`popup__form-submit popup__form-submit_${this.props.name} popup__form-submit_disabled`}>Сохранить</button>
                     </form>
-                    <button type="reset" className={`popup__close-form popup__close-form_${this.props.name}`} aria-label>
+                    <button onClick={this.close} type="reset" className={`popup__close-form popup__close-form_${this.props.name}`} aria-label>
                         <img src={imageClose} alt="Кнопка закрыть крестик"
                             className="popup__close-form-img" />
                     </button>
