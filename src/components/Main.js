@@ -60,7 +60,7 @@ class Main extends React.Component {
 
                 <section className="elements">
                     {this.state.cards.map((card) => (
-                       <Card card={card} key={card._id} />
+                        <Card onCardClick={this.props.onCardClick} card={card} key={card._id} />
                     ))}
                 </section>
             </main>

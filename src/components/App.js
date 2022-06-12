@@ -15,11 +15,13 @@ class App extends React.Component {
             isAddPlacePopupOpen: false,
             isEditAvatarPopupOpen: false,
             isImagePopupOpen: false,
+            selectedCard: null,
         }
         this.closeAllPopups = this.closeAllPopups.bind(this);
         this.openPopupAvatar = this.openPopupAvatar.bind(this);
         this.openPopupEditProfile = this.openPopupEditProfile.bind(this);
         this.openPopupAddPost = this.openPopupAddPost.bind(this);
+        this.openPopupPreview = this.openPopupPreview.bind(this);
 
     }
 
@@ -30,6 +32,7 @@ class App extends React.Component {
                 isAddPlacePopupOpen: false,
                 isEditAvatarPopupOpen: false,
                 isImagePopupOpen: false,
+                selectedCard: null,
             }
         );
     }
@@ -59,13 +62,25 @@ class App extends React.Component {
         );
     }
 
+    openPopupPreview(card) {
+        this.setState(
+            {
+                isImagePopupOpen: true,
+                selectedCard: card,
+            }
+        );
+    }
+
     render() {
+        const name = this.state.selectedCard == null ? "" : this.state.selectedCard.name;
+        const link = this.state.selectedCard == null ? "" : this.state.selectedCard.link;
+
         return (
             <div className="App">
 
                 <div className="page">
                     <Header />
-                    <Main openPopupEditProfile={this.openPopupEditProfile} openPopupAddPost={this.openPopupAddPost} openPopupAvatar={this.openPopupAvatar} />
+                    <Main onCardClick={this.openPopupPreview} openPopupEditProfile={this.openPopupEditProfile} openPopupAddPost={this.openPopupAddPost} openPopupAvatar={this.openPopupAvatar} />
                     <Footer />
                     <PopupWithForm onClose={this.closeAllPopups} title="Редактировать профиль" name="edit-profile" isOpened={this.state.isEditProfilePopupOpen}>
                         <input id="name-input" type="text" className="popup__input popup__input_form-name"
@@ -94,14 +109,11 @@ class App extends React.Component {
                     <PopupWithForm onClose={this.closeAllPopups} title="Вы уверены?" name="popup-delete" />
 
                     <ImagePopup onClose={this.closeAllPopups} isOpened={this.state.isImagePopupOpen}
-                    title="Test" image="chrome://branding/content/about-logo.png"/>
-
-
+                        title={name} image={link} />
                 </div>
             </div>
         );
     }
-
 }
 
 export default App;
