@@ -1,6 +1,8 @@
 import buttonEdit from '../images/Edit_Button.svg';
 import buttonAddPost from '../images/Add_post.svg';
 import avatar from '../images/Avatar.jpg';
+import imageDelete from '../images/Delete.svg';
+
 import React from 'react';
 
 const formSubmitUpdateAvatar = document.querySelector('.popup__form_update-avatar'); // Форма
@@ -43,7 +45,7 @@ class Main extends React.Component {
 
     render() {
         return (
-            <main class="content">
+            <main className="content">
                 <section className="profile">
                     <button type="button" className="profile__button-avatar" aria-label
                     onClick={this.openPopupAvatar}>
@@ -56,13 +58,13 @@ class Main extends React.Component {
                         <h1 className="profile__info-name">Жак-Ив Кусто</h1>
                         <button type="button" className="profile__button-edit" aria-label
                             onClick={this.openPopupEditProfile}>
-                                <img src={buttonEdit} alt="Кнопка карандашик" className />
+                                <img src={buttonEdit} alt="Кнопка карандашик" />
                         </button>
                     </div>
                     <p className="profile__info-about">Исследователь океана</p>
                     <button type="button" className="profile__button-add" aria-label
                     onClick={this.openPopupAddPost}>
-                        <img src={buttonAddPost} alt="Кнопка плюсик" className />
+                        <img src={buttonAddPost} alt="Кнопка плюсик" />
                     </button>
                 </section>
 
@@ -70,17 +72,17 @@ class Main extends React.Component {
                 </section>
 
 
-                <template class="element-template">
-                    <article class="element">
-                        <img class="element__img" />
-                        <h2 class="element__title"></h2>
-                        <div class="element__like">
-                            <button type="button" class="element__button-like" aria-label></button>
-                            <span class="element__counter-like"></span>
+                <template className="element-template">
+                    <article className="element">
+                        <img className="element__img" />
+                        <h2 className="element__title"></h2>
+                        <div className="element__like">
+                            <button type="button" className="element__button-like" aria-label></button>
+                            <span className="element__counter-like"></span>
                         </div>
-                        <button type="button" class="element__delete" aria-label>
-                            <img src="<%=require('./images/Delete.svg')%>" alt="Корзина удалить"
-                                class="element__delete-img" />
+                        <button type="button" className="element__delete" aria-label>
+                            <img src={imageDelete} alt="Корзина удалить"
+                                className="element__delete-img" />
                         </button>
                     </article>
 
