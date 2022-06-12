@@ -32,7 +32,7 @@ class PopupWithForm extends React.Component {
 
     render() {
 
-        const classesList = this.state.popupIsOpened ? "popup popup_profile popup_opened" : "popup popup_profile";
+        const classesList = this.state.popupIsOpened ? "popup popup_opened" : "popup";
         return (
             <section className={classesList}>
                 <div className="popup__container">
