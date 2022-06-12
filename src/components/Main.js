@@ -1,8 +1,8 @@
 import buttonEdit from '../images/Edit_Button.svg';
 import buttonAddPost from '../images/Add_post.svg';
 import avatar from '../images/Avatar.jpg';
-import imageDelete from '../images/Delete.svg';
 import api from "../utils/Api.js";
+import Card from "./Card.js";
 import React from 'react';
 
 class Main extends React.Component {
@@ -12,25 +12,26 @@ class Main extends React.Component {
             userName: "Жак-Ив Кусто",
             userDescription: "Исследователь океана",
             userAvatar: avatar,
+            cards: [],
         }
     }
 
     // Метод будет вызван сразу после монтирования: создаём эффекты
     componentDidMount() {
-        api.fetchUserInfo()
-            .then((userData) => {
-                const myId = userData._id;
+        Promise
+            .all([api.fetchUserInfo(), api.fetchCards()])
+            .then(([userData, cards]) => {
                 this.setState({
                     userName: userData.name,
                     userDescription: userData.about,
                     userAvatar: userData.avatar,
+                    cards: cards,
                 });
             })
             .catch((err) => {
                 console.log(err); // выведем ошибку в консоль
             });
     }
-
 
     render() {
         return (
@@ -58,27 +59,11 @@ class Main extends React.Component {
                 </section>
 
                 <section className="elements">
+                    {this.state.cards.map((card) => (
+                       <Card card={card} key={card._id} />
+                    ))}
                 </section>
-
-
-                <template className="element-template">
-                    <article className="element">
-                        <img className="element__img" />
-                        <h2 className="element__title"></h2>
-                        <div className="element__like">
-                            <button type="button" className="element__button-like" aria-label></button>
-                            <span className="element__counter-like"></span>
-                        </div>
-                        <button type="button" className="element__delete" aria-label>
-                            <img src={imageDelete} alt="Корзина удалить"
-                                className="element__delete-img" />
-                        </button>
-                    </article>
-
-                </template>
-
             </main>
-
         );
     }
 }
