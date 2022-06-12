@@ -14,7 +14,7 @@ class App extends React.Component {
             isEditProfilePopupOpen: false,
             isAddPlacePopupOpen: false,
             isEditAvatarPopupOpen: false,
-            isImagePopupOpen: true,
+            isImagePopupOpen: false,
         }
         this.closeAllPopups = this.closeAllPopups.bind(this);
         this.openPopupAvatar = this.openPopupAvatar.bind(this);
