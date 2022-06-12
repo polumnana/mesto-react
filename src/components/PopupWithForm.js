@@ -38,12 +38,7 @@ class PopupWithForm extends React.Component {
                 <div className="popup__container">
                     <h2 className="popup__title">{this.props.title}</h2>
                     <form className={`popup__form popup__form_${this.props.name}`} name={this.props.name} noValidate>
-                        <input id="name-input" type="text" className="popup__input popup__input_form-name"
-                            placeholder="Ваше имя" name="username" required minLength="2" maxLength="40" value="" />
-                        <span className="popup__type-input-error name-input-error" />
-                        <input id="about-input" type="text" className="popup__input popup__input_form-about"
-                            placeholder="Расскажите о себе..." name="about" required minLength="2" maxLength="200" value="" />
-                        <span className="popup__type-input-error about-input-error"></span>
+                        {this.props.children}
                         <button type="submit"
                             className={`popup__form-submit popup__form-submit_${this.props.name} popup__form-submit_disabled`}>Сохранить</button>
                     </form>
