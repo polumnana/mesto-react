@@ -35,8 +35,6 @@ class App extends React.Component {
     openPopupAvatar() {
         this.setState(
             {
-                isEditProfilePopupOpen: false,
-                isAddPlacePopupOpen: false,
                 isEditAvatarPopupOpen: true,
             }
         );
@@ -46,8 +44,6 @@ class App extends React.Component {
         this.setState(
             {
                 isEditProfilePopupOpen: true,
-                isAddPlacePopupOpen: false,
-                isEditAvatarPopupOpen: false,
             }
         );
 
@@ -56,9 +52,7 @@ class App extends React.Component {
     openPopupAddPost() {
         this.setState(
             {
-                isEditProfilePopupOpen: false,
                 isAddPlacePopupOpen: true,
-                isEditAvatarPopupOpen: false,
             }
         );
     }
