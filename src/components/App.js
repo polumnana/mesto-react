@@ -14,10 +14,10 @@ function App() {
                 <Header />
                 <Main />
                 <Footer />
-                <PopupWithForm handleFormSubmit="" title="Редактировать профиль" name="edit-profile" isOpened="true" />
-                <PopupWithForm handleFormSubmit="" title="Новое место" name="" />
-                <PopupWithForm handleFormSubmit="" title="Обновить аватар" name="" />
-                <PopupWithForm handleFormSubmit="" title="Вы уверены?" name="" />
+                <PopupWithForm handleFormSubmit="" title="Редактировать профиль" name="edit-profile" />
+                <PopupWithForm handleFormSubmit="" title="Новое место" name="add-photo" isOpened="true" />
+                <PopupWithForm handleFormSubmit="" title="Обновить аватар" name="update-avatar" />
+                <PopupWithForm handleFormSubmit="" title="Вы уверены?" name="popup-delete" />
             </div>
         </div>
     );
