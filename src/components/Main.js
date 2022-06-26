@@ -1,30 +1,25 @@
 import buttonEdit from '../images/Edit_Button.svg';
 import buttonAddPost from '../images/Add_post.svg';
-import avatar from '../images/Avatar.jpg';
 import api from "../utils/Api.js";
 import Card from "./Card.js";
 import React from 'react';
+import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
 
 class Main extends React.Component {
+    static contextType = CurrentUserContext;
+
     constructor(props) {
         super(props);
         this.state = {
-            userName: "Жак-Ив Кусто",
-            userDescription: "Исследователь океана",
-            userAvatar: avatar,
             cards: [],
         }
     }
 
     // Метод будет вызван сразу после монтирования: создаём эффекты
     componentDidMount() {
-        Promise
-            .all([api.fetchUserInfo(), api.fetchCards()])
-            .then(([userData, cards]) => {
+        api.fetchCards()
+            .then((cards) => {
                 this.setState({
-                    userName: userData.name,
-                    userDescription: userData.about,
-                    userAvatar: userData.avatar,
                     cards: cards,
                 });
             })
@@ -38,29 +33,29 @@ class Main extends React.Component {
             <main className="content">
                 <section className="profile">
                     <button type="button" className="profile__button-avatar" aria-label
-                        onClick={this.props.openPopupAvatar}>
-                        <img src={this.state.userAvatar} alt="Аватар пользователя" className="profile__avatar" />
+                            onClick={this.props.openPopupAvatar}>
+                        <img src={this.context.avatar} alt="Аватар пользователя" className="profile__avatar"/>
                         <div className="profile__overlay">
-                            <img src={buttonEdit} alt="Кнопка карандашик" className="profile__edit-avatar" />
+                            <img src={buttonEdit} alt="Кнопка карандашик" className="profile__edit-avatar"/>
                         </div>
                     </button>
                     <div className="profile__info">
-                        <h1 className="profile__info-name">{this.state.userName}</h1>
+                        <h1 className="profile__info-name">{this.context.name}</h1>
                         <button type="button" className="profile__button-edit" aria-label
-                            onClick={this.props.openPopupEditProfile}>
-                            <img src={buttonEdit} alt="Кнопка карандашик" />
+                                onClick={this.props.openPopupEditProfile}>
+                            <img src={buttonEdit} alt="Кнопка карандашик"/>
                         </button>
                     </div>
-                    <p className="profile__info-about">{this.state.userDescription}</p>
+                    <p className="profile__info-about">{this.context.about}</p>
                     <button type="button" className="profile__button-add" aria-label
-                        onClick={this.props.openPopupAddPost}>
-                        <img src={buttonAddPost} alt="Кнопка плюсик" />
+                            onClick={this.props.openPopupAddPost}>
+                        <img src={buttonAddPost} alt="Кнопка плюсик"/>
                     </button>
                 </section>
 
                 <section className="elements">
                     {this.state.cards.map((card) => (
-                        <Card onCardClick={this.props.onCardClick} card={card} key={card._id} />
+                        <Card onCardClick={this.props.onCardClick} card={card} key={card._id}/>
                     ))}
                 </section>
             </main>

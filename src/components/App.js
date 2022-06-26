@@ -4,7 +4,9 @@ import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
 import React from 'react';
-
+import api from "../utils/Api";
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
+import avatar from "../images/Avatar.jpg";
 
 
 class App extends React.Component {
@@ -16,6 +18,11 @@ class App extends React.Component {
             isEditAvatarPopupOpen: false,
             isImagePopupOpen: false,
             selectedCard: null,
+            currentUser: {
+                name: "Жак-Ив Кусто",
+                about: "Исследователь океана",
+                avatar: avatar,
+            },
         }
         this.closeAllPopups = this.closeAllPopups.bind(this);
         this.openPopupAvatar = this.openPopupAvatar.bind(this);
@@ -23,6 +30,19 @@ class App extends React.Component {
         this.openPopupAddPost = this.openPopupAddPost.bind(this);
         this.openPopupPreview = this.openPopupPreview.bind(this);
 
+    }
+
+    componentDidMount() {
+        api.fetchUserInfo()
+            .then(result => {
+                    this.setState({
+                        currentUser: result,
+                    });
+                }
+            )
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     closeAllPopups() {
@@ -76,42 +96,52 @@ class App extends React.Component {
         const link = this.state.selectedCard == null ? "" : this.state.selectedCard.link;
 
         return (
-            <div className="App">
+            <CurrentUserContext.Provider value={this.state.currentUser}>
 
-                <div className="page">
-                    <Header />
-                    <Main onCardClick={this.openPopupPreview} openPopupEditProfile={this.openPopupEditProfile} openPopupAddPost={this.openPopupAddPost} openPopupAvatar={this.openPopupAvatar} />
-                    <Footer />
-                    <PopupWithForm onClose={this.closeAllPopups} title="Редактировать профиль" name="edit-profile" isOpened={this.state.isEditProfilePopupOpen}>
-                        <input id="name-input" type="text" className="popup__input popup__input_form-name"
-                            placeholder="Ваше имя" name="username" required minLength="2" maxLength="40" value="" />
-                        <span className="popup__type-input-error name-input-error" />
-                        <input id="about-input" type="text" className="popup__input popup__input_form-about"
-                            placeholder="Расскажите о себе..." name="about" required minLength="2" maxLength="200" value="" />
-                        <span className="popup__type-input-error about-input-error"></span>
-                    </PopupWithForm>
+                <div className="App">
 
-                    <PopupWithForm onClose={this.closeAllPopups} title="Новое место" name="add-photo" isOpened={this.state.isAddPlacePopupOpen}>
-                        <input id="photo-input" type="text" className="popup__input popup__input_form-title"
-                            placeholder="Описание фото" name="name" required minLength="2" maxLength="30" value="" />
-                        <span className="popup__type-input-error photo-input-error"></span>
-                        <input id="link-input" type="url" className="popup__input popup__input_form-link"
-                            placeholder="Ссылка на фото" name="link" required value="" />
-                        <span className="popup__type-input-error link-input-error"></span>
-                    </PopupWithForm>
+                    <div className="page">
+                        <Header/>
+                        <Main onCardClick={this.openPopupPreview} openPopupEditProfile={this.openPopupEditProfile}
+                              openPopupAddPost={this.openPopupAddPost} openPopupAvatar={this.openPopupAvatar}/>
+                        <Footer/>
+                        <PopupWithForm onClose={this.closeAllPopups} title="Редактировать профиль" name="edit-profile"
+                                       isOpened={this.state.isEditProfilePopupOpen}>
+                            <input id="name-input" type="text" className="popup__input popup__input_form-name"
+                                   placeholder="Ваше имя" name="username" required minLength="2" maxLength="40"
+                                   value=""/>
+                            <span className="popup__type-input-error name-input-error"/>
+                            <input id="about-input" type="text" className="popup__input popup__input_form-about"
+                                   placeholder="Расскажите о себе..." name="about" required minLength="2"
+                                   maxLength="200" value=""/>
+                            <span className="popup__type-input-error about-input-error"></span>
+                        </PopupWithForm>
 
-                    <PopupWithForm onClose={this.closeAllPopups} title="Обновить аватар" name="update-avatar" isOpened={this.state.isEditAvatarPopupOpen}>
-                        <input id="avatar-link-input" type="url" className="popup__input popup__input_form-link"
-                            placeholder="Ссылка на фото" name="link" required value="" />
-                        <span className="popup__type-input-error avatar-link-input-error"></span>
-                    </PopupWithForm>
+                        <PopupWithForm onClose={this.closeAllPopups} title="Новое место" name="add-photo"
+                                       isOpened={this.state.isAddPlacePopupOpen}>
+                            <input id="photo-input" type="text" className="popup__input popup__input_form-title"
+                                   placeholder="Описание фото" name="name" required minLength="2" maxLength="30"
+                                   value=""/>
+                            <span className="popup__type-input-error photo-input-error"></span>
+                            <input id="link-input" type="url" className="popup__input popup__input_form-link"
+                                   placeholder="Ссылка на фото" name="link" required value=""/>
+                            <span className="popup__type-input-error link-input-error"></span>
+                        </PopupWithForm>
 
-                    <PopupWithForm onClose={this.closeAllPopups} title="Вы уверены?" name="popup-delete" />
+                        <PopupWithForm onClose={this.closeAllPopups} title="Обновить аватар" name="update-avatar"
+                                       isOpened={this.state.isEditAvatarPopupOpen}>
+                            <input id="avatar-link-input" type="url" className="popup__input popup__input_form-link"
+                                   placeholder="Ссылка на фото" name="link" required value=""/>
+                            <span className="popup__type-input-error avatar-link-input-error"></span>
+                        </PopupWithForm>
 
-                    <ImagePopup onClose={this.closeAllPopups} isOpened={this.state.isImagePopupOpen}
-                        title={name} image={link} />
+                        <PopupWithForm onClose={this.closeAllPopups} title="Вы уверены?" name="popup-delete"/>
+
+                        <ImagePopup onClose={this.closeAllPopups} isOpened={this.state.isImagePopupOpen}
+                                    title={name} image={link}/>
+                    </div>
                 </div>
-            </div>
+            </CurrentUserContext.Provider>
         );
     }
 }
