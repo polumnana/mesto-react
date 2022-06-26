@@ -10,6 +10,7 @@ class Card extends React.Component {
         super(props);
         this.handleCardClick = this.handleCardClick.bind(this);
         this.handleCardLike = this.handleCardLike.bind(this);
+        this.handleCardDelete = this.handleCardDelete.bind(this);
     }
 
     handleCardClick() {
@@ -18,6 +19,10 @@ class Card extends React.Component {
 
     handleCardLike() {
         this.props.onLike(this.props.card);
+    }
+
+    handleCardDelete() {
+        this.props.onCardDelete(this.props.card);
     }
 
     render() {
@@ -45,7 +50,7 @@ class Card extends React.Component {
                             aria-label></button>
                     <span className="element__counter-like">{this.props.card.likes.length}</span>
                 </div>
-                <button type="button" className={cardDeleteButtonClassName} aria-label>
+                <button onClick={this.handleCardDelete} type="button" className={cardDeleteButtonClassName} aria-label>
                     <img src={imageDelete} alt="Корзина удалить"
                          className="element__delete-img"/>
                 </button>

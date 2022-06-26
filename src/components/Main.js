@@ -39,13 +39,29 @@ class Main extends React.Component {
             api.unlikeCard(card._id)
                 .then((newCard) => {
                     this.setCards(this.state.cards.map((c) => c._id === card._id ? newCard : c));
+                })
+                .catch((err) => {
+                    console.log(err); // выведем ошибку в консоль
                 });
         } else {
             api.likeCard(card._id)
                 .then((newCard) => {
                     this.setCards(this.state.cards.map((c) => c._id === card._id ? newCard : c));
+                })
+                .catch((err) => {
+                    console.log(err); // выведем ошибку в консоль
                 });
         }
+    }
+
+    handleCardDelete(card) {
+        api.deleteCard(card._id)
+            .then(() => {
+                this.setCards(this.state.cards.filter((c) => c._id !== card._id));
+            })
+            .catch((err) => {
+                console.log(err); // выведем ошибку в консоль
+            });
     }
 
     render() {
@@ -75,7 +91,10 @@ class Main extends React.Component {
 
                 <section className="elements">
                     {this.state.cards.map((card) => (
-                        <Card onLike={this.handleCardLike.bind(this)} onCardClick={this.props.onCardClick} card={card}
+                        <Card onCardDelete={this.handleCardDelete.bind(this)}
+                              onLike={this.handleCardLike.bind(this)}
+                              onCardClick={this.props.onCardClick}
+                              card={card}
                               key={card._id}/>
                     ))}
                 </section>
