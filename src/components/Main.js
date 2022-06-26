@@ -19,13 +19,33 @@ class Main extends React.Component {
     componentDidMount() {
         api.fetchCards()
             .then((cards) => {
-                this.setState({
-                    cards: cards,
-                });
+                this.setCards(cards);
             })
             .catch((err) => {
                 console.log(err); // выведем ошибку в консоль
             });
+    }
+
+    setCards(cards) {
+        this.setState({
+            cards: cards,
+        });
+    }
+
+    handleCardLike(card) {
+        // Снова проверяем, есть ли уже лайк на этой карточке
+        const isLiked = card.likes.some(i => i._id === this.context._id);
+        if (isLiked) {
+            api.unlikeCard(card._id)
+                .then((newCard) => {
+                    this.setCards(this.state.cards.map((c) => c._id === card._id ? newCard : c));
+                });
+        } else {
+            api.likeCard(card._id)
+                .then((newCard) => {
+                    this.setCards(this.state.cards.map((c) => c._id === card._id ? newCard : c));
+                });
+        }
     }
 
     render() {
@@ -55,12 +75,15 @@ class Main extends React.Component {
 
                 <section className="elements">
                     {this.state.cards.map((card) => (
-                        <Card onCardClick={this.props.onCardClick} card={card} key={card._id}/>
+                        <Card onLike={this.handleCardLike.bind(this)} onCardClick={this.props.onCardClick} card={card}
+                              key={card._id}/>
                     ))}
                 </section>
             </main>
         );
     }
+
+
 }
 
 export default Main;
