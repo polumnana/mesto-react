@@ -8,6 +8,7 @@ import api from "../utils/Api";
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import avatar from "../images/Avatar.jpg";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 
 class App extends React.Component {
@@ -31,7 +32,7 @@ class App extends React.Component {
         this.openPopupAddPost = this.openPopupAddPost.bind(this);
         this.openPopupPreview = this.openPopupPreview.bind(this);
         this.handleUpdateUser = this.handleUpdateUser.bind(this);
-
+        this.handleUpdateAvatar = this.handleUpdateAvatar.bind(this);
     }
 
     componentDidMount() {
@@ -49,6 +50,20 @@ class App extends React.Component {
 
     handleUpdateUser(data) {
         api.updateUserInfo(data)
+            .then(result => {
+                    this.setState({
+                        currentUser: result,
+                    });
+                    this.closeAllPopups();
+                }
+            )
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    handleUpdateAvatar(data) {
+        api.updateUserAvatar(data.avatar)
             .then(result => {
                     this.setState({
                         currentUser: result,
@@ -137,13 +152,10 @@ class App extends React.Component {
                             <span className="popup__type-input-error link-input-error"></span>
                         </PopupWithForm>
 
-                        <PopupWithForm onClose={this.closeAllPopups} title="Обновить аватар" name="update-avatar"
-                                       isOpened={this.state.isEditAvatarPopupOpen}>
-                            <input id="avatar-link-input" type="url" className="popup__input popup__input_form-link"
-                                   placeholder="Ссылка на фото" name="link" required value=""/>
-                            <span className="popup__type-input-error avatar-link-input-error"></span>
-                        </PopupWithForm>
-
+                        <EditAvatarPopup isOpened={this.state.isEditAvatarPopupOpen}
+                                         onClose={this.closeAllPopups}
+                                         onUpdateAvatar={this.handleUpdateAvatar}
+                        />
                         <PopupWithForm onClose={this.closeAllPopups} title="Вы уверены?" name="popup-delete"/>
 
                         <ImagePopup onClose={this.closeAllPopups} isOpened={this.state.isImagePopupOpen}
