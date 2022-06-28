@@ -9,6 +9,7 @@ import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import avatar from "../images/Avatar.jpg";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 
 class App extends React.Component {
@@ -33,6 +34,7 @@ class App extends React.Component {
         this.openPopupPreview = this.openPopupPreview.bind(this);
         this.handleUpdateUser = this.handleUpdateUser.bind(this);
         this.handleUpdateAvatar = this.handleUpdateAvatar.bind(this);
+        this.handleAddCard = this.handleAddCard.bind(this);
     }
 
     componentDidMount() {
@@ -54,6 +56,17 @@ class App extends React.Component {
                     this.setState({
                         currentUser: result,
                     });
+                    this.closeAllPopups();
+                }
+            )
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    handleAddCard(data) {
+        api.createCard(data)
+            .then(result => {
                     this.closeAllPopups();
                 }
             )
@@ -141,16 +154,10 @@ class App extends React.Component {
                                           onClose={this.closeAllPopups}
                                           onUpdateUser={this.handleUpdateUser}/>
 
-                        <PopupWithForm onClose={this.closeAllPopups} title="Новое место" name="add-photo"
-                                       isOpened={this.state.isAddPlacePopupOpen}>
-                            <input id="photo-input" type="text" className="popup__input popup__input_form-title"
-                                   placeholder="Описание фото" name="name" required minLength="2" maxLength="30"
-                                   value=""/>
-                            <span className="popup__type-input-error photo-input-error"></span>
-                            <input id="link-input" type="url" className="popup__input popup__input_form-link"
-                                   placeholder="Ссылка на фото" name="link" required value=""/>
-                            <span className="popup__type-input-error link-input-error"></span>
-                        </PopupWithForm>
+                        <AddPlacePopup isOpened={this.state.isAddPlacePopupOpen}
+                                       onClose={this.closeAllPopups}
+                                       onAddCard={this.handleAddCard}/>
+
 
                         <EditAvatarPopup isOpened={this.state.isEditAvatarPopupOpen}
                                          onClose={this.closeAllPopups}
