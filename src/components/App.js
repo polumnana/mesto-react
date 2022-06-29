@@ -114,8 +114,10 @@ class App extends React.Component {
 
     handleAddCard(data) {
         api.createCard(data)
-            .then(() => {
+            .then((card) => {
+                    this.setCards([card, ...this.state.cards]);
                     this.closeAllPopups();
+                    
                 }
             )
             .catch(err => {
