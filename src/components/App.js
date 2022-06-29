@@ -16,6 +16,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            cards: [],
             isEditProfilePopupOpen: false,
             isAddPlacePopupOpen: false,
             isEditAvatarPopupOpen: false,
@@ -35,6 +36,8 @@ class App extends React.Component {
         this.handleUpdateUser = this.handleUpdateUser.bind(this);
         this.handleUpdateAvatar = this.handleUpdateAvatar.bind(this);
         this.handleAddCard = this.handleAddCard.bind(this);
+        this.handleCardLike = this.handleCardLike.bind(this);
+        this.handleCardDelete = this.handleCardDelete.bind(this);
     }
 
     componentDidMount() {
@@ -47,6 +50,51 @@ class App extends React.Component {
             )
             .catch(err => {
                 console.log(err);
+            });
+        api.fetchCards()
+            .then((cards) => {
+                this.setCards(cards);
+            })
+            .catch((err) => {
+                console.log(err); // выведем ошибку в консоль
+            });
+    }
+
+    setCards(cards) {
+        this.setState({
+            cards: cards,
+        });
+    }
+
+    handleCardLike(card) {
+        // Снова проверяем, есть ли уже лайк на этой карточке
+        const isLiked = card.likes.some(i => i._id === this.state.currentUser._id);
+        if (isLiked) {
+            api.unlikeCard(card._id)
+                .then((newCard) => {
+                    this.setCards(this.state.cards.map((c) => c._id === card._id ? newCard : c));
+                })
+                .catch((err) => {
+                    console.log(err); // выведем ошибку в консоль
+                });
+        } else {
+            api.likeCard(card._id)
+                .then((newCard) => {
+                    this.setCards(this.state.cards.map((c) => c._id === card._id ? newCard : c));
+                })
+                .catch((err) => {
+                    console.log(err); // выведем ошибку в консоль
+                });
+        }
+    }
+
+    handleCardDelete(card) {
+        api.deleteCard(card._id)
+            .then(() => {
+                this.setCards(this.state.cards.filter((c) => c._id !== card._id));
+            })
+            .catch((err) => {
+                console.log(err); // выведем ошибку в консоль
             });
     }
 
@@ -66,7 +114,7 @@ class App extends React.Component {
 
     handleAddCard(data) {
         api.createCard(data)
-            .then(result => {
+            .then(() => {
                     this.closeAllPopups();
                 }
             )
@@ -145,8 +193,16 @@ class App extends React.Component {
 
                     <div className="page">
                         <Header/>
-                        <Main onCardClick={this.openPopupPreview} openPopupEditProfile={this.openPopupEditProfile}
-                              openPopupAddPost={this.openPopupAddPost} openPopupAvatar={this.openPopupAvatar}/>
+                        <Main onCardClick={this.openPopupPreview}
+                              openPopupEditProfile={this.openPopupEditProfile}
+                              openPopupAddPost={this.openPopupAddPost}
+                              openPopupAvatar={this.openPopupAvatar}
+                              onLike={this.handleCardLike}
+                              onCardDelete={this.handleCardDelete}
+                              cards={this.state.cards}
+
+
+                        />
                         <Footer/>
 
                         <EditProfilePopup isOpened={this.state.isEditProfilePopupOpen}
