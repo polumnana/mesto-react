@@ -1,16 +1,19 @@
+import React from 'react';
+
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
-import React from 'react';
-import dataApi from "../utils/Api";
-import {CurrentUserContext} from '../contexts/CurrentUserContext';
-import avatar from "../images/Avatar.jpg";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
+
+import dataApi from "../utils/Api";
+
+import avatar from "../images/Avatar.jpg";
 
 class App extends React.Component {
     constructor(props) {
