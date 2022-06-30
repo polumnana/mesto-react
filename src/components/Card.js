@@ -43,16 +43,28 @@ class Card extends React.Component {
 
         return (
             <article className="element">
-                <img onClick={this.handleCardClick} className="element__img" src={this.props.card.link}/>
+                <img
+                    onClick={this.handleCardClick}
+                    className="element__img"
+                    src={this.props.card.link}/>
                 <h2 className="element__title">{this.props.card.name}</h2>
                 <div className="element__like">
-                    <button onClick={this.handleCardLike} type="button" className={cardLikeButtonClassName}
-                            aria-label></button>
-                    <span className="element__counter-like">{this.props.card.likes.length}</span>
+                    <button
+                        onClick={this.handleCardLike}
+                        type="button"
+                        className={cardLikeButtonClassName}
+                        aria-label></button>
+                    <span
+                        className="element__counter-like">{this.props.card.likes.length}</span>
                 </div>
-                <button onClick={this.handleCardDelete} type="button" className={cardDeleteButtonClassName} aria-label>
-                    <img src={imageDelete} alt="Корзина удалить"
-                         className="element__delete-img"/>
+                <button
+                    onClick={this.handleCardDelete}
+                    type="button"
+                    className={cardDeleteButtonClassName} aria-label>
+                    <img
+                        src={imageDelete}
+                        alt="Корзина удалить"
+                        className="element__delete-img"/>
                 </button>
             </article>
         );

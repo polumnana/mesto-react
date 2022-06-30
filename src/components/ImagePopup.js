@@ -7,11 +7,16 @@ class ImagePopup extends React.Component {
         return (
             <section className={classesList}>
                 <div className="popup__preview">
-                    <img className="popup__img" src={this.props.image} />
+                    <img className="popup__img" src={this.props.image}/>
                     <p className="popup__text">{this.props.title}</p>
-                    <button onClick={this.props.onClose} type="reset" className="popup__close-form popup__close-form_preview" aria-label>
-                        <img src={imageClose} alt="Кнопка закрыть крестик"
-                            className="popup__close-form-img" />
+                    <button
+                        onClick={this.props.onClose}
+                        type="reset"
+                        className="popup__close-form popup__close-form_preview" aria-label>
+                        <img
+                            src={imageClose}
+                            alt="Кнопка закрыть крестик"
+                            className="popup__close-form-img"/>
                     </button>
                 </div>
             </section>

@@ -195,36 +195,46 @@ class App extends React.Component {
 
                     <div className="page">
                         <Header/>
-                        <Main onCardClick={this.openPopupPreview}
-                              openPopupEditProfile={this.openPopupEditProfile}
-                              openPopupAddPost={this.openPopupAddPost}
-                              openPopupAvatar={this.openPopupAvatar}
-                              onLike={this.handleCardLike}
-                              onCardDelete={this.handleCardDelete}
-                              cards={this.state.cards}
+                        <Main
+                            onCardClick={this.openPopupPreview}
+                            openPopupEditProfile={this.openPopupEditProfile}
+                            openPopupAddPost={this.openPopupAddPost}
+                            openPopupAvatar={this.openPopupAvatar}
+                            onLike={this.handleCardLike}
+                            onCardDelete={this.handleCardDelete}
+                            cards={this.state.cards}
 
 
                         />
                         <Footer/>
 
-                        <EditProfilePopup isOpened={this.state.isEditProfilePopupOpen}
-                                          user={this.state.currentUser}
-                                          onClose={this.closeAllPopups}
-                                          onUpdateUser={this.handleUpdateUser}/>
+                        <EditProfilePopup
+                            isOpened={this.state.isEditProfilePopupOpen}
+                            user={this.state.currentUser}
+                            onClose={this.closeAllPopups}
+                            onUpdateUser={this.handleUpdateUser}/>
 
-                        <AddPlacePopup isOpened={this.state.isAddPlacePopupOpen}
-                                       onClose={this.closeAllPopups}
-                                       onAddCard={this.handleAddCard}/>
+                        <AddPlacePopup
+                            isOpened={this.state.isAddPlacePopupOpen}
+                            onClose={this.closeAllPopups}
+                            onAddCard={this.handleAddCard}/>
 
 
-                        <EditAvatarPopup isOpened={this.state.isEditAvatarPopupOpen}
-                                         onClose={this.closeAllPopups}
-                                         onUpdateAvatar={this.handleUpdateAvatar}
+                        <EditAvatarPopup
+                            isOpened={this.state.isEditAvatarPopupOpen}
+                            onClose={this.closeAllPopups}
+                            onUpdateAvatar={this.handleUpdateAvatar}
                         />
-                        <PopupWithForm onClose={this.closeAllPopups} title="Вы уверены?" name="popup-delete"/>
+                        <PopupWithForm
+                            onClose={this.closeAllPopups}
+                            title="Вы уверены?"
+                            name="popup-delete"/>
 
-                        <ImagePopup onClose={this.closeAllPopups} isOpened={this.state.isImagePopupOpen}
-                                    title={name} image={link}/>
+                        <ImagePopup
+                            onClose={this.closeAllPopups}
+                            isOpened={this.state.isImagePopupOpen}
+                            title={name}
+                            image={link}/>
                     </div>
                 </div>
             </CurrentUserContext.Provider>

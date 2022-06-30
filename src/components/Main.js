@@ -11,34 +11,50 @@ class Main extends React.Component {
         return (
             <main className="content">
                 <section className="profile">
-                    <button type="button" className="profile__button-avatar" aria-label
-                            onClick={this.props.openPopupAvatar}>
-                        <img src={this.context.avatar} alt="Аватар пользователя" className="profile__avatar"/>
+                    <button
+                        type="button"
+                        className="profile__button-avatar"
+                        aria-label
+                        onClick={this.props.openPopupAvatar}>
+                        <img
+                            src={this.context.avatar}
+                            alt="Аватар пользователя"
+                            className="profile__avatar"/>
                         <div className="profile__overlay">
-                            <img src={buttonEdit} alt="Кнопка карандашик" className="profile__edit-avatar"/>
+                            <img
+                                src={buttonEdit}
+                                alt="Кнопка карандашик"
+                                className="profile__edit-avatar"/>
                         </div>
                     </button>
                     <div className="profile__info">
                         <h1 className="profile__info-name">{this.context.name}</h1>
-                        <button type="button" className="profile__button-edit" aria-label
-                                onClick={this.props.openPopupEditProfile}>
+                        <button
+                            type="button"
+                            className="profile__button-edit"
+                            aria-label
+                            onClick={this.props.openPopupEditProfile}>
                             <img src={buttonEdit} alt="Кнопка карандашик"/>
                         </button>
                     </div>
                     <p className="profile__info-about">{this.context.about}</p>
-                    <button type="button" className="profile__button-add" aria-label
-                            onClick={this.props.openPopupAddPost}>
+                    <button
+                        type="button"
+                        className="profile__button-add"
+                        aria-label
+                        onClick={this.props.openPopupAddPost}>
                         <img src={buttonAddPost} alt="Кнопка плюсик"/>
                     </button>
                 </section>
 
                 <section className="elements">
                     {this.props.cards.map((card) => (
-                        <Card onCardDelete={this.props.onCardDelete}
-                              onLike={this.props.onLike}
-                              onCardClick={this.props.onCardClick}
-                              card={card}
-                              key={card._id}/>
+                        <Card
+                            onCardDelete={this.props.onCardDelete}
+                            onLike={this.props.onLike}
+                            onCardClick={this.props.onCardClick}
+                            card={card}
+                            key={card._id}/>
                     ))}
                 </section>
             </main>
