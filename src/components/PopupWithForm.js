@@ -21,8 +21,7 @@ class PopupWithForm extends React.Component {
                     <button
                         onClick={this.props.onClose}
                         type="reset"
-                        className={`popup__close-form popup__close-form_${this.props.name}`}
-                        aria-label>
+                        className={`popup__close-form popup__close-form_${this.props.name}`}>
                         <img
                             src={imageClose}
                             alt="Кнопка закрыть крестик"

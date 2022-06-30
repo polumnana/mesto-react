@@ -14,7 +14,6 @@ class Main extends React.Component {
                     <button
                         type="button"
                         className="profile__button-avatar"
-                        aria-label
                         onClick={this.props.openPopupAvatar}>
                         <img
                             src={this.context.avatar}
@@ -32,7 +31,6 @@ class Main extends React.Component {
                         <button
                             type="button"
                             className="profile__button-edit"
-                            aria-label
                             onClick={this.props.openPopupEditProfile}>
                             <img src={buttonEdit} alt="Кнопка карандашик"/>
                         </button>
@@ -41,7 +39,6 @@ class Main extends React.Component {
                     <button
                         type="button"
                         className="profile__button-add"
-                        aria-label
                         onClick={this.props.openPopupAddPost}>
                         <img src={buttonAddPost} alt="Кнопка плюсик"/>
                     </button>

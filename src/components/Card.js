@@ -52,15 +52,15 @@ class Card extends React.Component {
                     <button
                         onClick={this.handleCardLike}
                         type="button"
-                        className={cardLikeButtonClassName}
-                        aria-label></button>
+                        className={cardLikeButtonClassName}>
+                    </button>
                     <span
                         className="element__counter-like">{this.props.card.likes.length}</span>
                 </div>
                 <button
                     onClick={this.handleCardDelete}
                     type="button"
-                    className={cardDeleteButtonClassName} aria-label>
+                    className={cardDeleteButtonClassName}>
                     <img
                         src={imageDelete}
                         alt="Корзина удалить"

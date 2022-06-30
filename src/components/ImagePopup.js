@@ -12,7 +12,7 @@ class ImagePopup extends React.Component {
                     <button
                         onClick={this.props.onClose}
                         type="reset"
-                        className="popup__close-form popup__close-form_preview" aria-label>
+                        className="popup__close-form popup__close-form_preview">
                         <img
                             src={imageClose}
                             alt="Кнопка закрыть крестик"
