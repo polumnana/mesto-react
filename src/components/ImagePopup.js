@@ -7,7 +7,10 @@ class ImagePopup extends React.Component {
         return (
             <section className={classesList}>
                 <div className="popup__preview">
-                    <img className="popup__img" src={this.props.image}/>
+                    <img
+                        className="popup__img"
+                        src={this.props.image}
+                        alt={this.props.title}/>
                     <p className="popup__text">{this.props.title}</p>
                     <button
                         onClick={this.props.onClose}

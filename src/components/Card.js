@@ -46,7 +46,8 @@ class Card extends React.Component {
                 <img
                     onClick={this.handleCardClick}
                     className="element__img"
-                    src={this.props.card.link}/>
+                    src={this.props.card.link}
+                    alt={this.props.card.name}/>
                 <h2 className="element__title">{this.props.card.name}</h2>
                 <div className="element__like">
                     <button
