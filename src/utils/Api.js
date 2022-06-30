@@ -1,5 +1,5 @@
-class Api {
-    constructor({ baseUrl, headers }) {
+class api {
+    constructor({baseUrl, headers}) {
         this._baseUrl = baseUrl;
         this._headers = headers;
     }
@@ -16,7 +16,7 @@ class Api {
         }).then(this._checkResponse);
     }
 
-    updateUserInfo({ name, about }) {
+    updateUserInfo({name, about}) {
         return fetch(this._baseUrl + '/users/me', {
             method: 'PATCH',
             headers: this._headers,
@@ -44,7 +44,7 @@ class Api {
         }).then(this._checkResponse);
     }
 
-    createCard({ name, link }) {
+    createCard({name, link}) {
         return fetch(this._baseUrl + '/cards', {
             method: 'POST',
             headers: this._headers,
@@ -79,7 +79,7 @@ class Api {
     }
 }
 
-const api = new Api({
+const dataApi = new api({
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
     headers: {
         authorization: '313ac141-ac1d-4bd4-8cbd-191f2a15741d',
@@ -87,4 +87,4 @@ const api = new Api({
     }
 });
 
-export default api;
+export default dataApi;

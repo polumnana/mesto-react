@@ -4,7 +4,7 @@ import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
 import React from 'react';
-import api from "../utils/Api";
+import dataApi from "../utils/Api";
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import avatar from "../images/Avatar.jpg";
 import EditProfilePopup from "./EditProfilePopup";
@@ -41,7 +41,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        api.fetchUserInfo()
+        dataApi.fetchUserInfo()
             .then(result => {
                     this.setState({
                         currentUser: result,
@@ -51,7 +51,7 @@ class App extends React.Component {
             .catch(err => {
                 console.log(err);
             });
-        api.fetchCards()
+        dataApi.fetchCards()
             .then((cards) => {
                 this.setCards(cards);
             })
@@ -70,7 +70,7 @@ class App extends React.Component {
         // Снова проверяем, есть ли уже лайк на этой карточке
         const isLiked = card.likes.some(i => i._id === this.state.currentUser._id);
         if (isLiked) {
-            api.unlikeCard(card._id)
+            dataApi.unlikeCard(card._id)
                 .then((newCard) => {
                     this.setCards(this.state.cards.map((c) => c._id === card._id ? newCard : c));
                 })
@@ -78,7 +78,7 @@ class App extends React.Component {
                     console.log(err); // выведем ошибку в консоль
                 });
         } else {
-            api.likeCard(card._id)
+            dataApi.likeCard(card._id)
                 .then((newCard) => {
                     this.setCards(this.state.cards.map((c) => c._id === card._id ? newCard : c));
                 })
@@ -89,7 +89,7 @@ class App extends React.Component {
     }
 
     handleCardDelete(card) {
-        api.deleteCard(card._id)
+        dataApi.deleteCard(card._id)
             .then(() => {
                 this.setCards(this.state.cards.filter((c) => c._id !== card._id));
             })
@@ -99,7 +99,7 @@ class App extends React.Component {
     }
 
     handleUpdateUser(data) {
-        api.updateUserInfo(data)
+        dataApi.updateUserInfo(data)
             .then(result => {
                     this.setState({
                         currentUser: result,
@@ -113,11 +113,11 @@ class App extends React.Component {
     }
 
     handleAddCard(data) {
-        api.createCard(data)
+        dataApi.createCard(data)
             .then((card) => {
                     this.setCards([card, ...this.state.cards]);
                     this.closeAllPopups();
-                    
+
                 }
             )
             .catch(err => {
@@ -126,7 +126,7 @@ class App extends React.Component {
     }
 
     handleUpdateAvatar(data) {
-        api.updateUserAvatar(data.avatar)
+        dataApi.updateUserAvatar(data.avatar)
             .then(result => {
                     this.setState({
                         currentUser: result,

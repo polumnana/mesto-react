@@ -1,7 +1,7 @@
 import imageDelete from '../images/Delete.svg';
 import React from 'react';
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
-import api from "../utils/Api";
+import dataApi from "../utils/Api";
 
 class Card extends React.Component {
     static contextType = CurrentUserContext;
