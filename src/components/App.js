@@ -72,23 +72,15 @@ class App extends React.Component {
     handleCardLike(card) {
         // Снова проверяем, есть ли уже лайк на этой карточке
         const isLiked = card.likes.some(i => i._id === this.state.currentUser._id);
-        if (isLiked) {
-            dataApi.unlikeCard(card._id)
-                .then((newCard) => {
-                    this.setCards(this.state.cards.map((c) => c._id === card._id ? newCard : c));
-                })
-                .catch((err) => {
-                    console.log(err); // выведем ошибку в консоль
-                });
-        } else {
-            dataApi.likeCard(card._id)
-                .then((newCard) => {
-                    this.setCards(this.state.cards.map((c) => c._id === card._id ? newCard : c));
-                })
-                .catch((err) => {
-                    console.log(err); // выведем ошибку в консоль
-                });
-        }
+        const action = isLiked ? dataApi.unlikeCard(card._id) : dataApi.likeCard(card._id);
+        action
+            .then((newCard) => {
+                this.setCards(this.state.cards.map((c) => c._id === card._id ? newCard : c));
+            })
+            .catch((err) => {
+                console.log(err); // выведем ошибку в консоль
+            });
+
     }
 
     handleCardDelete(card) {
