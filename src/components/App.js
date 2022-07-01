@@ -11,7 +11,7 @@ import AddPlacePopup from "./AddPlacePopup";
 
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
-import dataApi from "../utils/Api";
+import api from "../utils/api";
 
 import avatar from "../images/Avatar.jpg";
 
@@ -44,7 +44,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        dataApi.fetchUserInfo()
+        api.fetchUserInfo()
             .then(result => {
                     this.setState({
                         currentUser: result,
@@ -54,7 +54,7 @@ class App extends React.Component {
             .catch(err => {
                 console.log(err);
             });
-        dataApi.fetchCards()
+        api.fetchCards()
             .then((cards) => {
                 this.setCards(cards);
             })
@@ -72,7 +72,7 @@ class App extends React.Component {
     handleCardLike(card) {
         // Снова проверяем, есть ли уже лайк на этой карточке
         const isLiked = card.likes.some(i => i._id === this.state.currentUser._id);
-        const action = isLiked ? dataApi.unlikeCard(card._id) : dataApi.likeCard(card._id);
+        const action = isLiked ? api.unlikeCard(card._id) : api.likeCard(card._id);
         action
             .then((newCard) => {
                 this.setCards(this.state.cards.map((c) => c._id === card._id ? newCard : c));
@@ -84,7 +84,7 @@ class App extends React.Component {
     }
 
     handleCardDelete(card) {
-        dataApi.deleteCard(card._id)
+        api.deleteCard(card._id)
             .then(() => {
                 this.setCards(this.state.cards.filter((c) => c._id !== card._id));
             })
@@ -94,7 +94,7 @@ class App extends React.Component {
     }
 
     handleUpdateUser(data) {
-        dataApi.updateUserInfo(data)
+        api.updateUserInfo(data)
             .then(result => {
                     this.setState({
                         currentUser: result,
@@ -108,7 +108,7 @@ class App extends React.Component {
     }
 
     handleAddCard(data) {
-        dataApi.createCard(data)
+        api.createCard(data)
             .then((card) => {
                     this.setCards([card, ...this.state.cards]);
                     this.closeAllPopups();
@@ -121,7 +121,7 @@ class App extends React.Component {
     }
 
     handleUpdateAvatar(data) {
-        dataApi.updateUserAvatar(data.avatar)
+        api.updateUserAvatar(data.avatar)
             .then(result => {
                     this.setState({
                         currentUser: result,
