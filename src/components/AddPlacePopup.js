@@ -32,10 +32,17 @@ function AddPlacePopup(props) {
             title="Новое место"
             name="add-photo">
             <input
-                onChange={handleChangeName} id="photo-input" type="text"
+                onChange={handleChangeName}
+                value={name}
+                id="photo-input"
+                type="text"
                 className="popup__input popup__input_form-title"
-                placeholder="Описание фото" name="name" required minLength="2" maxLength="30"
-                value={name}/>
+                placeholder="Описание фото"
+                name="name"
+                minLength="2"
+                maxLength="30"
+                required
+            />
             <span className="popup__type-input-error photo-input-error"></span>
             <input
                 onChange={handleChangeLink} id="link-input" type="url"
